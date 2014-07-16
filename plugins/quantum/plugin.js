@@ -33,11 +33,8 @@ var ejs = require('ejs');
 		try
 		{
 			page_options = (typeof page_options !== 'undefined') ? page_options : {};
-<<<<<<< HEAD
 			for (var attrname in req.query) { page_options[attrname] = req.query[attrname]; }
 
-=======
->>>>>>> FETCH_HEAD
 			var compiled = ejs.compile(source_html);
 			var html = compiled({page_options: page_options});
 		 	res.send(html);
@@ -49,7 +46,6 @@ var ejs = require('ejs');
 	  	}
 	}
 
-<<<<<<< HEAD
 	function submitSpecification(req,res, spec_type)
 	{
 		var core = root._coreModule;
@@ -58,12 +54,12 @@ var ejs = require('ejs');
 		{
 			var token_uid = post_params['token_uid'];
 			var xvalue = post_params['x_value'];
-
+			
 			var specification;
 			if (spec_type == "xml")
-				specification = "<experimentSpecification><xvalues>"+ xvalue +"</xvalues></experimentSpecification>";
+				specification = "<xvalues>"+ xvalue +"</xvalues>";
 			else if (spec_type == "json")
-				specification = {experimentSpecification:{xvalues: [xvalue]}};	
+				specification = {xvalues: xvalue};	
 			else if (spec_type == "js")
 				specification = xvalue;	
 			else
@@ -72,33 +68,51 @@ var ejs = require('ejs');
 			var submit_data = {action:'submit',
 								   id:"Modern iLab test",
 			  experimentSpecification: specification,
+				      specificationID:"sin", 
 				  specificationFormat:spec_type};
+
+			if ('spam' in post_params)
+			{
+				//Send 100 experiments
+				var i;
+				for (i=0; i < 100; i++)
+				{
+					core.sendActionToServer(submit_data, function(data, err) {
+					if (err)
+						console.log(err);
+	
+					console.log(JSON.stringify(data['vReport']));
+					});
+				}
+			}
+			else
+			{
 
 			//console.log(JSON.stringify(submit_data));
 			core.sendActionToServer(submit_data, function(data, err) {
 				if (err)
 					console.log(err);
-				//console.log(JSON.stringify(data));
-				
-				//Data returned from the server
-				/*
-				{ vReport: { accepted: true },
-				  minTimeToLive: '0',
-				  experimentId: 23,
-				  wait: { effectiveQueueLength: '0', estWait: '0' } }
-				*/
-
-				if (data['vReport'].accepted == true)
+				if (data['error'])
 				{
-					//console.log("Specification accepted");
-					res.redirect("/quantum?id=" + data.experimentId);
+					console.log(data['error']);
+					res.redirect("/quantum?fail=" + xvalue+"&error=" + data['error']);
 				}
 				else
 				{
-					//console.log("Specification rejected");
-					res.redirect("/quantum?fail=" + xvalue);
+					if (data['vReport'].accepted == true)
+					{
+						//console.log("Specification accepted");
+						res.redirect("/quantum?id=" + data.experimentID);
+					}
+					else
+					{
+						//console.log("Specification rejected");
+						res.redirect("/quantum?fail=" + xvalue);
+					}
 				}
 			});
+
+			}
 		}
 		else
 		{
@@ -109,17 +123,13 @@ var ejs = require('ejs');
 	function setupPlugin(core, settings)
 	{
 		root._coreModule = core;
-=======
-	function setupPlugin(core, settings)
-	{
->>>>>>> FETCH_HEAD
 		var app = core.app;
 		var plugin_port = app.get('port');
 
 		app.get('/quantum', function (req, res)
 		{
 	 		//Read the blackboard plugin html
-			fs.readFile('plugins/quantum/html/experiment.html','utf-8', function(req,res){ return function (err, html_data)
+			fs.readFile('plugins/quantum/html/experiment.ejs','utf-8', function(req,res){ return function (err, html_data)
 			{
 				if (err)
 					console.log(err);
@@ -129,7 +139,6 @@ var ejs = require('ejs');
 			}}(req,res));
 	 	});
 
-<<<<<<< HEAD
 		app.post('/quantum-submit-soap', function (req, res)
 		{
 			submitSpecification(req,res, "xml");
@@ -141,29 +150,6 @@ var ejs = require('ejs');
 		app.post('/quantum-submit-js', function (req, res)
 		{
 			submitSpecification(req,res, "js");
-=======
-		app.post('/quantum-submit', function (req, res)
-		{
-			var post_params = req.body;
-			if (core.isAuthenticated(req.body))
-			{
-				var token_uid = post_params['token_uid'];
-				var xvalue = post_params['x_value'];
-
-				console.log("Submitting experiment");
-				var submit_data = {action:'submit', id:"Modern iLab test", experimentSpecification:"<experimentSpecification><xvalues>"+ xvalue +"</xvalues></experimentSpecification>"};
-				console.log(JSON.stringify(submit_data));
-				core.sendActionToServer(submit_data, function(err, data) {
-					if (err)
-						console.log(err);
-					console.log(JSON.stringify(data));
-				});
-			}
-			else
-			{
-				console.log("Nothing sent to server");
-			}
->>>>>>> FETCH_HEAD
 		});
 	}
 	root.setupPlugin = setupPlugin;

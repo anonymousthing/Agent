@@ -122,9 +122,6 @@ var passport= require("passport");
 				database.set("key", key);
 				database.set("secret", secret);
 
-				//Show a little info message
-				console.log("You can change the embedded HTML interface by modifying");
-				console.log("/plugins/blackboard/html/index.html");
 
 				//Finish the setup
 				callback();
