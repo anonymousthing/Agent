@@ -20,22 +20,22 @@ node index.js
 Press return or enter to start the interactive agent setup process. Some additional information about the setup prompts are included below.
 
 **Port (for this agent)**
- - This is the port that the agent will run on. You can either type in a port or leave it blank and have an open port between 2000 and 10000 automatically picked.
+⋅⋅⋅This is the port that the agent will run on. You can either type in a port or leave it blank and have an open port between 2000 and 10000 automatically picked.
 
 **Broker Host**
- - This is the hostname for the server that the service broker runs on. 
+⋅⋅⋅This is the hostname for the server that the service broker runs on. 
 
 **Broker Port**
- - This is the port number that the service broker runs on. 
+⋅⋅⋅This is the port number that the service broker runs on. 
 
 **Agent GUID**
- - This is the unique identifier for the agent which must correspond to the agent ‘GUID’ field in the service broker admin interface. If no corresponding agent exists on the service broker, you will not be able to complete the setup process until one does.
+⋅⋅⋅This is the unique identifier for the agent which must correspond to the agent ‘GUID’ field in the service broker admin interface. If no corresponding agent exists on the service broker, you will not be able to complete the setup process until one does.
 
 **Agent Passkey**
- - This is the passkey for the agent which must correspond to the agent ‘Passkey’ field in the service broker admin interface.
+⋅⋅⋅This is the passkey for the agent which must correspond to the agent ‘Passkey’ field in the service broker admin interface.
 
 **Does this agent need experiment results (y/n)?**
- - This option enables the dual channel mode. This mode is important if you to receive notifications from lab servers and brokers. See sections 4.5.1 and 4.5.2 of the [instruction manual](http://www.samuco.net/ilab/manual.pdf)
+⋅⋅⋅This option enables the dual channel mode. This mode is important if you to receive notifications from lab servers and brokers. See sections 4.5.1 and 4.5.2 of the [instruction manual](http://www.samuco.net/ilab/manual.pdf)
 
 ###Command line interface
 The command line interface supports the commands  below (you can also type in the help command to show this information).
