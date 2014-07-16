@@ -6,9 +6,9 @@ An agent server for the nodejs implementation of the iLab Shared Architecture
 For more information, please see the [instruction manual](http://www.samuco.net/ilab/manual.pdf)
 
 ###Purpose
-An agent is designed to provide a way of ‘modifying broker behaviour’ without making any changes to the broker source code. This is useful for access control and keeping the system stable. The agent is designed to work with [modern service brokers](https://github.com/ShadovvMoon/Broker)
+Agents are lightweight servers that easily allow experiments to be seamlessly embedded in a variety of systems such as edX, Blackboard, Moodle etc. 
 
-All actions supported by the broker are also supported by the agent. The most basic agent acts as a wrapper for commands (simply passing commands through to the broker). A more advanced agent could introduce logic inside commands or other authentication systems.
+They provide a way of ‘modifying broker behaviour’ without making any changes to the broker source code. This is useful for access control and keeping the system stable. The agent is designed to work with [modern service brokers](https://github.com/ShadovvMoon/Broker). All actions supported by the broker are also supported by the agent. The most basic agent acts as a wrapper for commands (simply passing commands through to the broker). A more advanced agent could introduce logic inside commands or other authentication systems.
 
 ###Installation
 ```
