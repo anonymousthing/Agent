@@ -24,7 +24,7 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-var fs 		= require('fs');
+var fs = require('fs');
 (function () {
     var root = module.exports;
 	function setupPlugin(core, settings)
@@ -35,7 +35,7 @@ var fs 		= require('fs');
 		app.get('/noauth', function (req, res)
 		{
 	 		//Read the blackboard plugin html
-			fs.readFile('plugins/blackboard/html/index.html',function (err, html_data)
+			fs.readFile('plugins/noauth/index.html',function (err, html_data)
 			{
 				if (err)
 					console.log(err);

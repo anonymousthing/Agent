@@ -303,8 +303,8 @@ module.exports.createAgent = (function (app, callback) {
         function startMessage() {
             console.log("");
             console.log("iLab Agent");
-            console.log("Version: 1.0.2");
-            console.log("  Build: 2");
+            console.log("Version: 1.0.3");
+            console.log("  Build: 4");
             console.log("   Date: 16/7/2014");
             printSeparator();
         }
@@ -519,6 +519,7 @@ module.exports.createAgent = (function (app, callback) {
                 configuration.set("setup_complete", true);
                 console.log(" ");
                 console.log("Agent setup complete!");
+				commandlineGUI();
             }
         }
 
