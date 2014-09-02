@@ -304,8 +304,8 @@ module.exports.createAgent = (function (app, callback) {
             console.log("");
             console.log("iLab Agent");
             console.log("Version: 1.0.3");
-            console.log("  Build: 4");
-            console.log("   Date: 16/7/2014");
+            console.log("  Build: 5");
+            console.log("   Date: 2/9/2014");
             printSeparator();
         }
 
@@ -424,10 +424,12 @@ module.exports.createAgent = (function (app, callback) {
         }
 
         function clearConsole() {
-            var lines = process.stdout.getWindowSize()[1];
-            for (var i = 0; i < lines; i++) {
-                console.log('\r\n');
-            }
+			if (typeof process.stdout.getWindowSize !== 'undefined') {
+           	 	var lines = process.stdout.getWindowSize()[1];
+           	 	for (var i = 0; i < lines; i++) {
+                	console.log('\r\n');
+            	}
+			}
         }
 
         clearConsole();
