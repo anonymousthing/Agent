@@ -208,6 +208,13 @@ module.exports.createAgent = (function (app, callback) {
 
         root.rejectDataFromClient = rejectDataFromClient;
         function receiveDataFromClient(client) {
+            
+            var req = client.request;
+            var body = client.json;
+            
+            body['remoteAddress'] = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+            
+            console.log(client.request.h)
             var user = client.json['uid'];
             if (client.json.experimentID != null) //TODO: Add check for action
             {
@@ -1076,7 +1083,6 @@ module.exports.createAgent = (function (app, callback) {
         });
         app.post('/json', function (req, res) {
             if (isAuthenticated(req.body)) {
-                req.body['remoteAddress'] = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
                 override.receiveDataFromClient(root, {
                     request: req,
                     response: res,
