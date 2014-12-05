@@ -1076,6 +1076,7 @@ module.exports.createAgent = (function (app, callback) {
         });
         app.post('/json', function (req, res) {
             if (isAuthenticated(req.body)) {
+                req.body['remoteAddress'] = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
                 override.receiveDataFromClient(root, {
                     request: req,
                     response: res,
